@@ -1,0 +1,298 @@
+@import "./variables";
+@import "./mixins";
+@import './light';
+
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  font-family: $font;
+  font-size: 18px;
+  background-color: $Dark-Blue-1;
+}
+
+img{
+  max-width: 100%;
+}
+
+h1,h2,h3,h4,h5,h6{
+  margin: 0;
+}
+
+a{
+  text-decoration: none;
+}
+
+ul{
+  list-style: none;
+  padding: 0;
+}
+
+.banner{
+  background: url(../../images/bg-mobile-dark.jpg) no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+
+  @include breakpoint(md){
+    background: url(../../images/bg-desktop-dark.jpg) no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 250px;
+  }
+}
+
+.todo{
+  position: relative;
+  top: 2.7rem;
+  width: 90%;
+  max-width: 600px;
+  margin: 0 auto;
+  
+  .header{
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    .title{
+      color: $white;
+      letter-spacing: 5px;
+    }
+
+    #theme-selector{
+      height: 40px;
+      width: 52px;
+      overflow: hidden;
+      &:active,
+      &:focus{
+        outline: 2px dotted $Bright-Blue;
+      }
+
+      .theme-icon{
+        position: relative;
+      }
+    }
+
+    // JS CLASS
+    .sun{
+      background: url(../../images/icon-sun.svg) center no-repeat;
+    }
+
+    .moon{
+      background: url(../../images/icon-moon.svg) center no-repeat;
+    }
+  }
+
+  .form{
+    padding: 2rem 0rem;
+
+    .create-todo{
+      position: relative;
+
+      .circle{
+        background-color: $Dark-Blue-2;
+        border: 1px solid $Dark-Grayish-Blue-2;
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        top: 50%;
+        left: 1rem;
+        transform: translateY(-50%);
+        position: absolute;
+        transition: background .5s ease;
+
+        &:hover{
+          background: linear-gradient(to right,hsl(192, 100%, 67%) , hsl(280, 87%, 65%));
+          border: 1px solid $Bright-Blue;
+        }
+      }
+
+      #input{
+        border: none;
+        background-color: $Dark-Blue-2;
+        color: $Dark-Grayish-Blue-1;
+        letter-spacing: 1px;
+        height: 50px;
+        padding-left: 3rem;
+        font-size: 1rem;
+        caret-color: red;
+
+        &::placeholder{
+          color:  $Dark-Grayish-Blue-1;
+        }
+
+        &:active,
+        &:focus{
+          outline: 2px dotted $Bright-Blue;
+        }
+      }
+    }
+
+    .todo-container{
+      box-shadow: -1px 24px 71px -8px rgba(0,0,0,0.57);
+      border-radius: 5px;
+      margin-top: 1rem;
+      background-color: $Dark-Blue-2;
+      position: relative;
+
+      .todo-list{
+        padding: 0;
+        margin: 0;
+        li{
+          cursor: pointer;
+          padding: .7rem 1rem;
+          color: $Dark-Grayish-Blue-1;
+          border-bottom: 1px solid $Dark-Grayish-Blue-4;
+          display: flex;
+          align-items: center;
+          transition: all .3s linear;
+  
+          .checkbox{
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: transparent;
+            border: 1px solid $Dark-Grayish-Blue-2;
+
+            &:hover{
+              border-top: 1px solid hsl(192, 100%, 67%);
+              border-left: 1px solid hsl(192, 100%, 67%);
+              border-right: 1px solid hsl(280, 87%, 65%);
+              border-bottom: 1px solid hsl(280, 87%, 65%);
+            }
+
+          }
+
+          
+  
+          .text{
+            flex-grow: 2;
+            margin: 0;
+            margin-left: .6rem;
+          }
+          
+          .delete{
+            display: inline-block;
+            height: 0;
+            transition: .3s linear;
+          }
+
+
+          &:hover{
+            .delete{
+              height: 30px;
+            }
+          }
+  
+          //IF THE CHECKBOX IS CHECKED
+          .completed{
+            text-decoration: line-through;
+            color: $Light-Gray-4;
+          }
+  
+        }
+
+        .checked{
+
+          .checkbox{
+            background: url(../../images/icon-check.svg) center no-repeat, linear-gradient(to right,hsl(192, 100%, 67%) , hsl(280, 87%, 65%));
+          }
+
+          .text{
+            text-decoration: line-through;
+            color: $Dark-Grayish-Blue-3;
+          }
+         
+        }
+      }
+
+
+      .navigation{
+        border-radius: 0px 0px 5px 5px;
+        background-color: $Dark-Blue-2;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: .5rem 1rem;
+        font-size: 0.938rem;
+        color: $Dark-Grayish-Blue-2;
+
+        .filter{
+        background-color: $Dark-Blue-2;
+        padding: .5rem 1rem;
+          width: 100%;
+          position: absolute;
+          bottom: -4rem;
+          left: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 0.938rem;
+
+          @include breakpoint(md){
+            position: relative;
+            bottom: 0rem;
+            flex-basis: 100px;
+            padding: 0;
+          }
+
+          .btn{
+            font-size: 0.938rem;
+            color: $Dark-Grayish-Blue-2;
+         
+            &:hover{
+              outline: 2px dotted $Bright-Blue;
+              color: $Dark-Grayish-Blue-1;
+            }
+          }
+
+          // ACTIVE FILTER BUTTON
+          .active{
+            color: $Bright-Blue;
+          }
+        
+        }
+
+        .clear{
+          .btn{
+            font-size: 0.938rem;
+            color: $Dark-Grayish-Blue-2;
+
+            &:active,
+            &:focus,
+            &:hover{
+              outline: 2px dotted $Bright-Blue;
+              color: $Dark-Grayish-Blue-1;
+            }
+          }
+        }
+      }
+     
+    }
+
+  }
+
+  .drag-text{
+    margin: 3rem;
+    text-align: center;
+    color: $Dark-Grayish-Blue-4;
+
+    @include breakpoint(md){
+      margin: .5rem;
+    }
+  }
+
+}
