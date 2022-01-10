@@ -113,6 +113,7 @@ ul{
         transform: translateY(-50%);
         position: absolute;
         transition: background .5s ease;
+        color: transparent;
 
         &:hover{
           background: linear-gradient(to right,hsl(192, 100%, 67%) , hsl(280, 87%, 65%));
